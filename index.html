@@ -3,275 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malaika Ashraf | QA Automation Architect</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Malaika Ashraf | QA Architect</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --primary: #00f2ff;
-            --secondary: #7000ff;
-            --bg: #030712;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
+            --bg: #ffffff;
+            --accent: #0ea5e9;
+            --text-dark: #0f172a;
+            --text-gray: #64748b;
         }
 
-        * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            cursor: none; /* Custom cursor ke liye asli cursor hide kiya */
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; cursor: none; }
+        body { background: var(--bg); color: var(--text-dark); overflow-x: hidden; }
 
-        body {
-            background-color: var(--bg);
-            color: white;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+        /* --- Custom Cursor --- */
+        #cursor { position: fixed; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 10000; }
+        #cursor-f { position: fixed; width: 30px; height: 30px; border: 1px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transition: 0.1s; opacity: 0.5; }
 
-        /* --- Custom Soft Cursor --- */
-        #cursor {
-            position: fixed;
-            width: 10px; height: 10px;
-            background: var(--primary);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease;
-        }
-        #cursor-blur {
-            position: fixed;
-            width: 40px; height: 40px;
-            border: 1px solid var(--primary);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transition: all 0.15s ease-out;
-            opacity: 0.5;
-        }
+        /* --- Header --- */
+        header { padding: 100px 20px 50px; text-align: center; }
+        .badge { background: #f0f9ff; color: var(--accent); padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; margin-bottom: 15px; display: inline-block; }
+        h1 { font-size: 4rem; letter-spacing: -2px; font-weight: 800; }
 
-        /* Click Ripple Effect */
-        .ripple {
-            position: fixed;
-            border: 2px solid var(--primary);
-            border-radius: 50%;
-            pointer-events: none;
-            transform: scale(0);
-            animation: ripple-out 0.6s linear;
-            z-index: 9997;
-        }
-        @keyframes ripple-out {
-            to { transform: scale(4); opacity: 0; }
-        }
-
-        /* --- UI Components --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-        header {
-            height: 100vh;
+        /* --- THE MOVING BOX SECTION (AS PER YOUR IMAGE) --- */
+        .scroller {
+            margin: 50px 0;
+            padding: 20px 0;
+            overflow: hidden;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            user-select: none;
         }
 
-        .glow-text {
-            font-size: clamp(3rem, 12vw, 7rem);
-            font-weight: 800;
-            letter-spacing: -4px;
-            background: linear-gradient(to bottom, #fff 30%, #666 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-        }
-
-        .tagline {
-            font-size: 1.2rem;
-            color: var(--primary);
-            font-weight: 600;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            opacity: 0.8;
-        }
-
-        /* Smooth Floating Animation */
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* Project Cards */
-        .section-title { font-size: 2.5rem; text-align: center; margin: 100px 0 50px; }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        .scroller-track {
+            display: flex;
             gap: 30px;
+            width: calc(350px * 10); /* Adjust based on card count */
+            animation: scroll 35s linear infinite;
+        }
+
+        .scroller:hover .scroller-track { animation-play-state: paused; }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-350px * 5)); }
         }
 
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 50px;
-            border-radius: 30px;
-            backdrop-filter: blur(10px);
-            transition: 0.4s ease;
-        }
-
-        .card:hover {
-            border-color: var(--primary);
-            background: rgba(0, 242, 255, 0.05);
-            transform: scale(1.02);
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 25px;
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 30px;
-            border: 1px solid var(--primary);
-            border-radius: 50px;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            background: var(--primary);
-            color: var(--bg);
-        }
-
-        /* Soft Marquee */
-        .marquee-wrapper {
-            background: rgba(255,255,255,0.02);
-            padding: 40px 0;
-            margin: 60px 0;
-            border-y: 1px solid var(--border);
-        }
-
-        .marquee-content {
+            flex-shrink: 0;
+            width: 320px;
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            border: 1px solid #f1f5f9;
             display: flex;
-            gap: 60px;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: rgba(255,255,255,0.1);
-            white-space: nowrap;
-        }
-
-        footer {
-            padding: 100px 0;
-            text-align: center;
-            border-top: 1px solid var(--border);
-        }
-
-        .social-link {
-            color: white;
-            font-size: 2rem;
-            margin: 0 20px;
+            flex-direction: column;
+            justify-content: space-between;
             transition: 0.3s;
         }
 
-        .social-link:hover { color: var(--primary); }
+        .card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 30px 60px rgba(14, 165, 233, 0.1); }
 
-        @media (max-width: 768px) {
-            * { cursor: auto; } /* Mobile par custom cursor off */
-            #cursor, #cursor-blur { display: none; }
-            .glow-text { font-size: 3.5rem; }
-        }
+        .card-text { font-size: 0.95rem; color: #475569; line-height: 1.6; margin-bottom: 25px; font-weight: 400; }
+        .card-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.1rem; color: var(--text-dark); }
+        .card-brand i { color: var(--accent); }
+
+        /* --- Sections --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 25px; }
+        .section-title { font-size: 2rem; font-weight: 800; margin: 80px 0 30px; text-align: center; }
+
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 100px; }
+        .p-card { background: #f8fafc; padding: 30px; border-radius: 20px; text-decoration: none; color: inherit; transition: 0.3s; border: 1px solid #e2e8f0; }
+        .p-card:hover { background: white; box-shadow: 0 20px 40px rgba(0,0,0,0.05); transform: scale(1.02); }
+
+        footer { padding: 50px; text-align: center; border-top: 1px solid #f1f5f9; }
     </style>
 </head>
 <body>
 
-    <!-- Custom Cursor -->
     <div id="cursor"></div>
-    <div id="cursor-blur"></div>
+    <div id="cursor-f"></div>
 
-    <header class="container">
-        <div class="tagline">QA Automation Architect</div>
-        <h1 class="glow-text floating">MALAIKA<br>ASHRAF</h1>
-        <p style="color: #666; max-width: 600px;">Engineering quality with Playwright, Cypress, and Postman. Designing invisible systems that ensure visible excellence.</p>
+    <header>
+        <div class="badge">QA ARCHITECT PORTFOLIO</div>
+        <h1>Malaika Ashraf</h1>
+        <p style="color: var(--text-gray); margin-top: 15px; font-size: 1.2rem;">Building Bulletproof Automation Systems</p>
     </header>
 
-    <div class="marquee-wrapper">
-        <marquee scrollamount="15" class="marquee-content">
-            PLAYWRIGHT • CYPRESS • POSTMAN • JMETER • JAVASCRIPT • TYPESCRIPT • CI/CD • DOCKER • GIT • NODE.JS • API SECURITY
-        </marquee>
+    <!-- MOVING BOXES SECTION -->
+    <div class="scroller">
+        <div class="scroller-track">
+            <!-- Box 1 -->
+            <div class="card">
+                <p class="card-text">"Reduced regression time from 2 days to 30 minutes, a saving of over 95% using Playwright."</p>
+                <div class="card-brand"><i class="fa-solid fa-bolt"></i> PLAYWRIGHT</div>
+            </div>
+            <!-- Box 2 -->
+            <div class="card">
+                <p class="card-text">"Integrated 120+ E2E tests into CI/CD pipeline ensuring zero critical bugs in production."</p>
+                <div class="card-brand"><i class="fa-solid fa-microchip"></i> AUTOMATION</div>
+            </div>
+            <!-- Box 3 -->
+            <div class="card">
+                <p class="card-text">"Automated 200+ API endpoints with Postman, achieving 100% data integrity validation."</p>
+                <div class="card-brand"><i class="fa-solid fa-link"></i> POSTMAN</div>
+            </div>
+            <!-- Box 4 -->
+            <div class="card">
+                <p class="card-text">"Handled 5000+ concurrent users testing using JMeter, identifying critical bottlenecks."</p>
+                <div class="card-brand"><i class="fa-solid fa-gauge"></i> JMETER</div>
+            </div>
+            <!-- Box 5 -->
+            <div class="card">
+                <p class="card-text">"Built stable and flake-free UI testing suites using Cypress for high-traffic web apps."</p>
+                <div class="card-brand"><i class="fa-solid fa-eye"></i> CYPRESS</div>
+            </div>
+            <!-- Duplicate for infinite effect -->
+            <div class="card">
+                <p class="card-text">"Reduced regression time from 2 days to 30 minutes, a saving of over 95% using Playwright."</p>
+                <div class="card-brand"><i class="fa-solid fa-bolt"></i> PLAYWRIGHT</div>
+            </div>
+            <div class="card">
+                <p class="card-text">"Integrated 120+ E2E tests into CI/CD pipeline ensuring zero critical bugs in production."</p>
+                <div class="card-brand"><i class="fa-solid fa-microchip"></i> AUTOMATION</div>
+            </div>
+            <div class="card">
+                <p class="card-text">"Automated 200+ API endpoints with Postman, achieving 100% data integrity validation."</p>
+                <div class="card-brand"><i class="fa-solid fa-link"></i> POSTMAN</div>
+            </div>
+            <div class="card">
+                <p class="card-text">"Handled 5000+ concurrent users testing using JMeter, identifying critical bottlenecks."</p>
+                <div class="card-brand"><i class="fa-solid fa-gauge"></i> JMETER</div>
+            </div>
+            <div class="card">
+                <p class="card-text">"Built stable and flake-free UI testing suites using Cypress for high-traffic web apps."</p>
+                <div class="card-brand"><i class="fa-solid fa-eye"></i> CYPRESS</div>
+            </div>
+        </div>
     </div>
 
-    <section class="container" id="work">
-        <h2 class="section-title">The Testing Lab</h2>
-        <div class="grid">
-            <div class="card">
-                <div class="card-icon"><i class="fa-solid fa-microscope"></i></div>
-                <h3>UI Automation</h3>
-                <p>Advanced E2E frameworks focused on stability, Page Object Model (POM), and lightning-fast execution times.</p>
-                <a href="https://github.com/malaikaashraf-hue/QA-Automation-Portfolio/tree/main/Playwright" class="btn">View Framework</a>
-            </div>
-            <div class="card">
-                <div class="card-icon"><i class="fa-solid fa-code"></i></div>
-                <h3>API Infrastructure</h3>
-                <p>Comprehensive API testing including contract validation, security checks, and automated reporting via Newman.</p>
-                <a href="https://github.com/malaikaashraf-hue/QA-Automation-Portfolio/tree/main/QA_Postman" class="btn">View Collections</a>
-            </div>
-            <div class="card">
-                <div class="card-icon"><i class="fa-solid fa-wind"></i></div>
-                <h3>Performance</h3>
-                <p>Large-scale load simulation and bottleneck identification using Apache JMeter for high-traffic environments.</p>
-                <a href="https://github.com/malaikaashraf-hue/QA-Automation-Portfolio/tree/main/JMeter_Scripts" class="btn">View Scripts</a>
-            </div>
+    <section class="container">
+        <h2 class="section-title">Core Repositories</h2>
+        <div class="project-grid">
+            <a href="https://github.com/malaikaashraf-hue/QA-Automation-Portfolio/tree/main/Playwright" class="p-card">
+                <h3>🎭 Playwright Suite</h3>
+                <p>E2E Automation Framework with POM.</p>
+            </a>
+            <a href="https://github.com/malaikaashraf-hue/QA-Automation-Portfolio/tree/main/cypress_projects" class="p-card">
+                <h3>🚀 Cypress Projects</h3>
+                <p>Fast and Reliable UI Testing.</p>
+            </a>
+            <a href="https://github.com/malaikaashraf-hue/QA-Automation-Portfolio/tree/main/QA_Postman" class="p-card">
+                <h3>🔌 API Collections</h3>
+                <p>Automated API Testing with Newman.</p>
+            </a>
         </div>
     </section>
 
     <footer>
-        <div class="container">
-            <h2>Let's build reliable software.</h2>
-            <div style="margin: 40px 0;">
-                <a href="https://github.com/malaikaashraf-hue" class="social-link"><i class="fa-brands fa-github"></i></a>
-                <a href="mailto:malaika.ashraf@paktaleem.net" class="social-link"><i class="fa-solid fa-envelope"></i></a>
-            </div>
-            <p style="color: #444;">&copy; 2024 Malaika Ashraf. Masterfully Crafted.</p>
-        </div>
+        <p style="font-weight: 700;">© 2024 Malaika Ashraf</p>
+        <p style="color: var(--text-gray); font-size: 0.8rem; margin-top: 5px;">Quality is not an act, it is a habit.</p>
     </footer>
 
     <script>
-        // Custom Soft Cursor Logic
         const cursor = document.getElementById('cursor');
-        const cursorBlur = document.getElementById('cursor-blur');
+        const follower = document.getElementById('cursor-f');
 
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
-            
-            // Soft delay effect for the blur circle
             setTimeout(() => {
-                cursorBlur.style.left = (e.clientX - 15) + 'px';
-                cursorBlur.style.top = (e.clientY - 15) + 'px';
-            }, 50);
-        });
-
-        // Click Ripple Logic
-        document.addEventListener('click', (e) => {
-            const ripple = document.createElement('div');
-            ripple.className = 'ripple';
-            ripple.style.left = (e.clientX - 10) + 'px';
-            ripple.style.top = (e.clientY - 10) + 'px';
-            document.body.appendChild(ripple);
-            
-            setTimeout(() => { ripple.remove(); }, 600);
+                follower.style.left = (e.clientX - 15) + 'px';
+                follower.style.top = (e.clientY - 15) + 'px';
+            }, 60);
         });
     </script>
 </body>
