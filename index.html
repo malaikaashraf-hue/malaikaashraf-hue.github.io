@@ -3,537 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malaika Ashraf - QAs Automation Architect</title>
+    <title>Malaika Ashraf | QA Automation Architect</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for stable icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        :root {
+            --primary: #00f2ff;
+            --secondary: #7000ff;
+            --bg: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text: #f8fafc;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Background Animation */
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
+            z-index: -1;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 0 20px;
         }
 
-        /* Animated Header */
-        .animated-header {
-            background: linear-gradient(120deg, #00d1b2, #00b894);
-            padding: 60px 20px;
+        /* Hero Section */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .animated-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            background: radial-gradient(circle at top right, rgba(112, 0, 255, 0.15), transparent),
+                        radial-gradient(circle at bottom left, rgba(0, 242, 255, 0.15), transparent);
         }
 
         h1 {
-            font-size: 4rem;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            animation: slideInDown 0.8s ease;
-            position: relative;
-            z-index: 1;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
         }
 
-        .subtitle {
-            font-size: 1.4rem;
-            color: white;
-            margin-top: 20px;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.3s forwards;
-            position: relative;
-            z-index: 1;
+        .typewriter {
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            color: #94a3b8;
+            min-height: 1.6em;
         }
 
-        @keyframes slideInDown {
-            from {
-                transform: translateY(-100px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        /* Tech Slider */
+        .tech-bar {
+            width: 100%;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin: 40px 0;
         }
 
-        @keyframes fadeInUp {
-            from {
-                transform: translateY(30px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        marquee {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
         }
 
-        /* Typing Effect */
-        .typing-container {
-            background: #f8f9fa;
-            padding: 30px;
+        /* Section Titles */
+        .section-title {
             text-align: center;
-            border-bottom: 3px solid #00d1b2;
-        }
-
-        #typing-text {
-            font-size: 1.5rem;
-            color: #2c3e50;
-            font-weight: 500;
-            border-right: 3px solid #00d1b2;
-            display: inline-block;
-            padding-right: 10px;
-        }
-
-        /* Tech Stack Slider */
-        .tech-slider {
-            background: white;
-            padding: 40px 0;
-            overflow: hidden;
+            font-size: 2rem;
+            margin: 80px 0 40px;
             position: relative;
         }
 
-        .slider-track {
-            display: flex;
-            animation: scroll 30s linear infinite;
-            width: fit-content;
-        }
-
-        .slider-track:hover {
-            animation-play-state: paused;
-        }
-
-        .tech-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 15px 30px;
-            margin: 0 10px;
-            border-radius: 50px;
-            color: white;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .tech-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* Stats Cards */
-        .stats-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            padding: 50px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        }
-
-        .stat-card {
-            background: white;
-            padding: 30px;
-            text-align: center;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #00d1b2;
+        .section-title::after {
+            content: '';
             display: block;
+            width: 50px;
+            height: 4px;
+            background: var(--primary);
+            margin: 10px auto;
+            border-radius: 2px;
         }
 
-        .stat-label {
-            font-size: 1rem;
-            color: #666;
-            margin-top: 10px;
-        }
-
-        /* Projects Grid */
-        .projects-grid {
+        /* Project Cards */
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            padding: 50px;
-            background: white;
+            gap: 30px;
         }
 
-        .project-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px;
-            border-radius: 15px;
-            color: white;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(12px);
         }
 
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: -100%;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: all 0.5s ease;
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
-        .project-card:hover::before {
-            left: 100%;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .project-icon {
-            font-size: 3rem;
+        .card i {
+            font-size: 2.5rem;
+            color: var(--primary);
             margin-bottom: 20px;
         }
 
-        .project-title {
+        .card h3 {
             font-size: 1.5rem;
             margin-bottom: 15px;
         }
 
-        .project-description {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            opacity: 0.9;
+        .card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
         }
 
-        .tech-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-top: 15px;
-            margin-right: 8px;
-        }
-
-        /* GitHub Stats */
-        .github-stats {
+        /* Stats Section */
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 25px;
-            padding: 50px;
-            background: #f8f9fa;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 50px;
         }
 
-        .stats-card {
-            background: white;
-            padding: 25px;
+        .stat-item {
+            background: rgba(255,255,255,0.03);
+            padding: 20px;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        /* Social Links */
+        .stat-num {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text);
+            display: block;
+        }
+
+        /* GitHub Section */
+        .github-box {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 30px;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .github-box img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        /* Footer & Social */
+        footer {
+            padding: 100px 0 50px;
+            text-align: center;
+        }
+
         .social-links {
             display: flex;
             justify-content: center;
             gap: 20px;
-            padding: 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin-bottom: 30px;
         }
 
-        .social-btn {
-            background: white;
-            color: #667eea;
-            padding: 12px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            display: inline-flex;
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--card-bg);
+            display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 10px;
-        }
-
-        .social-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            background: #00d1b2;
+            border-radius: 50%;
             color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* Footer */
-        .footer {
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 30px;
+        .social-icon:hover {
+            background: var(--primary);
+            color: var(--bg);
+            transform: scale(1.1);
         }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .subtitle { font-size: 1rem; }
-            .stats-section, .projects-grid, .github-stats { padding: 20px; }
-            .stat-card, .project-card { padding: 20px; }
+        .copy {
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 3rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Animated Header -->
-        <div class="animated-header">
-            <h1>⚡ MALAIKA ASHRAF</h1>
-            <div class="subtitle">QA AUTOMATION ARCHITECT</div>
-            <div class="subtitle" style="font-size: 1rem; margin-top: 10px;">
-                🚀 "Turning Complex Workflows into Seamless Automation"
-            </div>
-        </div>
 
-        <!-- Typing Effect -->
-        <div class="typing-container">
-            <div id="typing-text"></div>
-        </div>
+    <div class="bg-glow"></div>
 
-        <!-- Tech Stack Slider -->
-        <div class="tech-slider">
-            <div class="slider-track">
-                <!-- Tech items will be duplicated for seamless scroll -->
-                <div class="tech-item">🚀 Cypress</div>
-                <div class="tech-item">🎭 Playwright</div>
-                <div class="tech-item">🔧 Postman</div>
-                <div class="tech-item">💚 Node.js</div>
-                <div class="tech-item">📝 JavaScript</div>
-                <div class="tech-item">🐙 Git</div>
-                <div class="tech-item">🐱 GitHub</div>
-                <div class="tech-item">📝 VS Code</div>
-                <div class="tech-item">⚙️ Jenkins</div>
-                <div class="tech-item">🐳 Docker</div>
-                <div class="tech-item">🍃 MongoDB</div>
-                <div class="tech-item">☁️ AWS</div>
-                <!-- Duplicate for seamless scroll -->
-                <div class="tech-item">🚀 Cypress</div>
-                <div class="tech-item">🎭 Playwright</div>
-                <div class="tech-item">🔧 Postman</div>
-                <div class="tech-item">💚 Node.js</div>
-                <div class="tech-item">📝 JavaScript</div>
-                <div class="tech-item">🐙 Git</div>
-                <div class="tech-item">🐱 GitHub</div>
-                <div class="tech-item">📝 VS Code</div>
-                <div class="tech-item">⚙️ Jenkins</div>
-                <div class="tech-item">🐳 Docker</div>
-                <div class="tech-item">🍃 MongoDB</div>
-                <div class="tech-item">☁️ AWS</div>
-            </div>
-        </div>
-
-        <!-- Stats Section -->
-        <div class="stats-section">
-            <div class="stat-card">
-                <span class="stat-number">50+</span>
-                <span class="stat-label">Automation Projects</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number">1000+</span>
-                <span class="stat-label">Test Cases Written</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number">95%</span>
-                <span class="stat-label">Test Coverage</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number">24/7</span>
-                <span class="stat-label">CI/CD Pipeline</span>
-            </div>
-        </div>
-
-        <!-- Projects Grid -->
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-icon">🌐</div>
-                <div class="project-title">Web UI Automation</div>
-                <div class="project-description">
-                    Comprehensive web testing frameworks using Playwright & Cypress. 
-                    Cross-browser testing, visual regression, and parallel execution.
-                </div>
-                <div>
-                    <span class="tech-badge">Playwright</span>
-                    <span class="tech-badge">Cypress</span>
-                    <span class="tech-badge">Selenium</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-icon">🔌</div>
-                <div class="project-title">API Testing Hub</div>
-                <div class="project-description">
-                    Robust API automation with Postman & Newman. 
-                    Integration testing, contract testing, and performance validation.
-                </div>
-                <div>
-                    <span class="tech-badge">Postman</span>
-                    <span class="tech-badge">Newman</span>
-                    <span class="tech-badge">REST Assured</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-icon">⚡</div>
-                <div class="project-title">Performance Lab</div>
-                <div class="project-description">
-                    Load testing, stress testing, and performance monitoring. 
-                    Ensuring applications handle real-world traffic efficiently.
-                </div>
-                <div>
-                    <span class="tech-badge">JMeter</span>
-                    <span class="tech-badge">LoadRunner</span>
-                    <span class="tech-badge">k6</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- GitHub Stats -->
-        <div class="github-stats">
-            <div class="stats-card">
-                <h3>📊 GitHub Stats</h3>
-                <img src="https://github-readme-stats.vercel.app/api?username=malaikaashraf-hue&show_icons=true&theme=radical&hide_border=true" width="100%" alt="GitHub Stats">
-            </div>
-            <div class="stats-card">
-                <h3>💻 Top Languages</h3>
-                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=malaikaashraf-hue&layout=compact&theme=radical&hide_border=true" width="100%" alt="Top Languages">
-            </div>
-        </div>
-
-        <!-- Social Links -->
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/YOUR_LINKEDIN" class="social-btn">
-                🔗 LinkedIn
-            </a>
-            <a href="mailto:malaika.ashraf@paktaleem.net" class="social-btn">
-                📧 Email Me
-            </a>
-            <a href="https://github.com/malaikaashraf-hue" class="social-btn">
-                🐙 GitHub
+    <header>
+        <div class="container">
+            <p style="color: var(--primary); font-weight: 600; letter-spacing: 2px;">PORTFOLIO</p>
+            <h1>MALAIKA ASHRAF</h1>
+            <div class="typewriter" id="typewriter"></div>
+            <a href="https://github.com/malaikaashraf-hue/QA-Automation-Portfolio" 
+               style="margin-top: 30px; display: inline-block; padding: 15px 35px; background: var(--text); color: var(--bg); border-radius: 50px; text-decoration: none; font-weight: 700; transition: 0.3s;">
+               Explore Repository <i class="fa-solid fa-arrow-right"></i>
             </a>
         </div>
+    </header>
 
-        <!-- Footer -->
-        <div class="footer">
-            <p>⚡ QA Automation Architect | Turning Complex Workflows into Seamless Automation</p>
-            <p style="margin-top: 10px; font-size: 0.8rem;">© 2024 Malaika Ashraf. All rights reserved.</p>
-        </div>
+    <div class="tech-bar">
+        <marquee scrollamount="10">
+            CYPRESS &nbsp;&nbsp; • &nbsp;&nbsp; PLAYWRIGHT &nbsp;&nbsp; • &nbsp;&nbsp; POSTMAN &nbsp;&nbsp; • &nbsp;&nbsp; JMETER &nbsp;&nbsp; • &nbsp;&nbsp; JAVASCRIPT &nbsp;&nbsp; • &nbsp;&nbsp; TYPESCRIPT &nbsp;&nbsp; • &nbsp;&nbsp; CI/CD &nbsp;&nbsp; • &nbsp;&nbsp; GIT &nbsp;&nbsp; • &nbsp;&nbsp; NODE.JS
+        </marquee>
     </div>
 
+    <section class="container">
+        <h2 class="section-title">The Testing Ecosystem</h2>
+        <div class="grid">
+            <!-- UI Card -->
+            <div class="card">
+                <i class="fa-solid fa-desktop"></i>
+                <h3>UI Automation</h3>
+                <p>Architecting E2E frameworks with Playwright and Cypress. Specialized in Page Object Model (POM) and cross-browser stability.</p>
+                <div class="stats-grid">
+                    <div class="stat-item"><span class="stat-num">95%</span><span>Coverage</span></div>
+                    <div class="stat-item"><span class="stat-num">Fast</span><span>Execution</span></div>
+                </div>
+            </div>
+
+            <!-- API Card -->
+            <div class="card">
+                <i class="fa-solid fa-server"></i>
+                <h3>API Infrastructure</h3>
+                <p>Functional and security validation using Postman and Newman. Advanced environment-driven automated scripting.</p>
+                <div class="stats-grid">
+                    <div class="stat-item"><span class="stat-num">200+</span><span>Endpoints</span></div>
+                    <div class="stat-item"><span class="stat-num">JS</span><span>Assertions</span></div>
+                </div>
+            </div>
+
+            <!-- Performance Card -->
+            <div class="card">
+                <i class="fa-solid fa-gauge-high"></i>
+                <h3>Performance Lab</h3>
+                <p>Load and Stress testing using Apache JMeter to ensure 99.9% application uptime and bottleneck identification.</p>
+                <div class="stats-grid">
+                    <div class="stat-item"><span class="stat-num">5000+</span><span>Users</span></div>
+                    <div class="stat-item"><span class="stat-num">Stress</span><span>Analysis</span></div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Automation Impact</h2>
+        <div class="github-box">
+            <img src="https://github-readme-stats.vercel.app/api?username=malaikaashraf-hue&show_icons=true&theme=transparent&title_color=00f2ff&text_color=ffffff&icon_color=00f2ff&hide_border=true" alt="GitHub Stats">
+            <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=malaikaashraf-hue&layout=compact&theme=transparent&title_color=00f2ff&text_color=ffffff&hide_border=true" alt="Top Languages">
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/YOUR_LINKEDIN" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="mailto:malaika.ashraf@paktaleem.net" class="social-icon"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://github.com/malaikaashraf-hue" class="social-icon"><i class="fa-brands fa-github"></i></a>
+        </div>
+        <p style="font-weight: 600; color: var(--primary);">"Quality is not an act, it is a habit."</p>
+        <p class="copy">© 2024 Malaika Ashraf. Built for Excellence.</p>
+    </footer>
+
     <script>
-        // Typing Animation
-        const texts = [
-            "🚀 Cypress Automation Expert",
-            "🎭 Playwright Framework Specialist",
-            "🔌 API Automation Professional",
-            "⚡ Performance & Load Testing"
-        ];
-        
-        let count = 0;
-        let index = 0;
-        let currentText = '';
-        let letter = '';
-        
+        // Professional Typewriter Effect
+        const words = ["QA Automation Architect", "Bug Hunter", "Performance Engineer", "SDET Specialist"];
+        let i = 0, j = 0, currentWord = "", isDeleting = false;
+        const speed = 100, wait = 2000;
+
         function type() {
-            if (count === texts.length) {
-                count = 0;
-            }
-            currentText = texts[count];
-            letter = currentText.slice(0, ++index);
-            
-            document.getElementById('typing-text').innerHTML = letter;
-            
-            if (letter.length === currentText.length) {
-                setTimeout(() => {
-                    index = 0;
-                    count++;
-                    type();
-                }, 2000);
+            currentWord = words[i];
+            if (isDeleting) {
+                document.getElementById("typewriter").textContent = currentWord.substring(0, j - 1);
+                j--;
+                if (j === 0) { isDeleting = false; i = (i + 1) % words.length; }
             } else {
-                setTimeout(type, 100);
+                document.getElementById("typewriter").textContent = currentWord.substring(0, j + 1);
+                j++;
+                if (j === currentWord.length) { isDeleting = true; setTimeout(type, wait); return; }
             }
+            setTimeout(type, isDeleting ? 50 : speed);
         }
-        
-        type();
-
-        // Animated counter for stats
-        const counters = document.querySelectorAll('.stat-number');
-        counters.forEach(counter => {
-            const updateCount = () => {
-                const target = parseInt(counter.innerText);
-                const current = parseInt(counter.innerText);
-                const increment = target / 50;
-                
-                if (current < target) {
-                    counter.innerText = Math.ceil(current + increment);
-                    setTimeout(updateCount, 20);
-                } else {
-                    counter.innerText = target;
-                }
-            };
-            
-            // Trigger animation when element is in viewport
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        updateCount();
-                        observer.unobserve(entry.target);
-                    }
-                });
-            });
-            
-            observer.observe(counter);
-        });
-
-        // Add smooth scroll behavior
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+        document.addEventListener("DOMContentLoaded", type);
     </script>
 </body>
 </html>
