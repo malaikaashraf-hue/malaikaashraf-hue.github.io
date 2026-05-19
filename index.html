@@ -4,81 +4,393 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malaika Ashraf | QA Architect</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
             --bg: #ffffff;
+            --bg-alt: #fafcff;
             --accent: #0ea5e9;
+            --accent-dark: #0284c7;
+            --accent-glow: rgba(14, 165, 233, 0.15);
             --text-dark: #0f172a;
-            --text-gray: #64748b;
+            --text-gray: #475569;
+            --text-light: #64748b;
+            --border: #eef2ff;
+            --card-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --card-hover: 0 25px 40px -12px rgba(14, 165, 233, 0.12), 0 1px 3px rgba(0, 0, 0, 0.02);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; cursor: none; }
-        body { background: var(--bg); color: var(--text-dark); overflow-x: hidden; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+        }
+
+        body { 
+            background: var(--bg); 
+            color: var(--text-dark); 
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
 
         /* --- Custom Cursor --- */
-        #cursor { position: fixed; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 10000; }
-        #cursor-f { position: fixed; width: 30px; height: 30px; border: 1px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transition: 0.1s; opacity: 0.5; }
+        #cursor { 
+            position: fixed; 
+            width: 8px; 
+            height: 8px; 
+            background: var(--accent); 
+            border-radius: 50%; 
+            pointer-events: none; 
+            z-index: 10000;
+            transition: transform 0.1s ease;
+        }
+        
+        #cursor-f { 
+            position: fixed; 
+            width: 36px; 
+            height: 36px; 
+            border: 1.5px solid var(--accent); 
+            border-radius: 50%; 
+            pointer-events: none; 
+            z-index: 9999; 
+            transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+            opacity: 0.4;
+            transform: translate(-50%, -50%);
+        }
 
-        /* --- Header --- */
-        header { padding: 100px 20px 50px; text-align: center; }
-        .badge { background: #f0f9ff; color: var(--accent); padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; margin-bottom: 15px; display: inline-block; }
-        h1 { font-size: 4rem; letter-spacing: -2px; font-weight: 800; }
+        /* smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
 
-        /* --- THE MOVING BOX SECTION (AS PER YOUR IMAGE) --- */
+        /* --- Header / Hero Section (Refined) --- */
+        header { 
+            padding: 120px 20px 70px; 
+            text-align: center; 
+            background: radial-gradient(ellipse at 50% 0%, rgba(14, 165, 233, 0.03) 0%, transparent 70%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.02) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .badge { 
+            background: linear-gradient(135deg, #eef6ff 0%, #e0f2fe 100%);
+            color: var(--accent-dark); 
+            padding: 8px 20px; 
+            border-radius: 60px; 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+            margin-bottom: 24px; 
+            display: inline-block;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+        }
+
+        h1 { 
+            font-size: 4.5rem; 
+            letter-spacing: -3px; 
+            font-weight: 800; 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 16px;
+        }
+
+        .tagline {
+            color: var(--text-gray);
+            font-size: 1.25rem;
+            font-weight: 400;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .tagline::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            margin: 24px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- Moving Box Section (Enhanced Animation & Style) --- */
         .scroller {
-            margin: 50px 0;
-            padding: 20px 0;
+            margin: 40px 0;
+            padding: 30px 0;
             overflow: hidden;
             display: flex;
             user-select: none;
+            background: linear-gradient(90deg, transparent, var(--bg-alt) 2%, var(--bg-alt) 98%, transparent);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
 
         .scroller-track {
             display: flex;
-            gap: 30px;
-            width: calc(350px * 10); /* Adjust based on card count */
-            animation: scroll 35s linear infinite;
+            gap: 28px;
+            animation: scroll 40s linear infinite;
+            will-change: transform;
         }
 
-        .scroller:hover .scroller-track { animation-play-state: paused; }
+        .scroller:hover .scroller-track { 
+            animation-play-state: paused; 
+        }
 
         @keyframes scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-350px * 5)); }
+            100% { transform: translateX(calc(-350px * 5 - 70px)); }
         }
 
         .card {
             flex-shrink: 0;
             width: 320px;
-            background: white;
-            padding: 35px;
-            border-radius: 25px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
-            border: 1px solid #f1f5f9;
+            background: var(--bg);
+            padding: 32px;
+            border-radius: 28px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: 0.3s;
+            transition: all 0.35s cubic-bezier(0.2, 0, 0, 1);
+            backdrop-filter: blur(0px);
         }
 
-        .card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 30px 60px rgba(14, 165, 233, 0.1); }
+        .card:hover { 
+            transform: translateY(-8px) scale(1.01); 
+            border-color: var(--accent); 
+            box-shadow: var(--card-hover);
+        }
 
-        .card-text { font-size: 0.95rem; color: #475569; line-height: 1.6; margin-bottom: 25px; font-weight: 400; }
-        .card-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.1rem; color: var(--text-dark); }
-        .card-brand i { color: var(--accent); }
+        .card-text { 
+            font-size: 0.95rem; 
+            color: var(--text-gray); 
+            line-height: 1.6; 
+            margin-bottom: 28px; 
+            font-weight: 450;
+        }
 
-        /* --- Sections --- */
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 25px; }
-        .section-title { font-size: 2rem; font-weight: 800; margin: 80px 0 30px; text-align: center; }
+        .card-brand { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            font-weight: 700; 
+            font-size: 1rem; 
+            color: var(--text-dark);
+            letter-spacing: -0.2px;
+        }
 
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 100px; }
-        .p-card { background: #f8fafc; padding: 30px; border-radius: 20px; text-decoration: none; color: inherit; transition: 0.3s; border: 1px solid #e2e8f0; }
-        .p-card:hover { background: white; box-shadow: 0 20px 40px rgba(0,0,0,0.05); transform: scale(1.02); }
+        .card-brand i { 
+            color: var(--accent); 
+            font-size: 1.25rem;
+        }
 
-        footer { padding: 50px; text-align: center; border-top: 1px solid #f1f5f9; }
+        /* --- Sections (Refined) --- */
+        .container { 
+            max-width: 1140px; 
+            margin: 0 auto; 
+            padding: 0 28px; 
+        }
+
+        .section-title { 
+            font-size: 2rem; 
+            font-weight: 700; 
+            margin: 90px 0 40px; 
+            text-align: center;
+            letter-spacing: -0.5px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title span {
+            background: linear-gradient(120deg, var(--text-dark), var(--text-gray));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* Project Cards - Modern UI */
+        .project-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); 
+            gap: 32px; 
+            margin-bottom: 100px; 
+        }
+
+        .p-card { 
+            background: var(--bg-alt); 
+            padding: 36px 32px; 
+            border-radius: 28px; 
+            text-decoration: none; 
+            color: inherit; 
+            transition: all 0.35s ease; 
+            border: 1px solid var(--border);
+            backdrop-filter: blur(0px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .p-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .p-card:hover { 
+            background: var(--bg); 
+            box-shadow: var(--card-hover); 
+            transform: translateY(-6px);
+            border-color: var(--accent);
+        }
+
+        .p-card:hover::before {
+            opacity: 1;
+        }
+
+        .p-card h3 { 
+            font-size: 1.6rem; 
+            font-weight: 700; 
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+
+        .p-card p { 
+            color: var(--text-gray); 
+            line-height: 1.55; 
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .repo-icon {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        /* Footer Enhanced */
+        footer { 
+            padding: 60px 28px 48px; 
+            text-align: center; 
+            border-top: 1px solid var(--border);
+            background: linear-gradient(to bottom, var(--bg), var(--bg-alt));
+            margin-top: 20px;
+        }
+
+        .footer-quote {
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 16px;
+            font-weight: 400;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.8;
+        }
+
+        /* subtle animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header, .scroller, .container {
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        .scroller {
+            animation-delay: 0.1s;
+            opacity: 0;
+            animation: fadeUp 0.7s ease-out 0.1s forwards;
+        }
+
+        .container {
+            animation-delay: 0.2s;
+            opacity: 0;
+            animation: fadeUp 0.7s ease-out 0.2s forwards;
+        }
+
+        /* interactive hover states */
+        .p-card, .card {
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        /* scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--border);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
+            opacity: 0.7;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-dark);
+        }
+
+        /* responsive improvements */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8rem; letter-spacing: -2px; }
+            header { padding: 80px 20px 50px; }
+            .section-title { font-size: 1.75rem; margin: 60px 0 30px; }
+            .card { width: 280px; padding: 28px; }
+            .scroller-track { gap: 20px; }
+            @keyframes scroll {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(calc(-300px * 5 - 50px)); }
+            }
+            .project-grid { gap: 20px; }
+            .p-card { padding: 28px 24px; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 0 20px; }
+            h1 { font-size: 2.3rem; }
+            .tagline { font-size: 1rem; }
+        }
     </style>
 </head>
 <body>
@@ -87,40 +399,40 @@
     <div id="cursor-f"></div>
 
     <header>
-        <div class="badge">QA ARCHITECT PORTFOLIO</div>
+        <div class="badge">✦ QA ARCHITECT ✦</div>
         <h1>Malaika Ashraf</h1>
-        <p style="color: var(--text-gray); margin-top: 15px; font-size: 1.2rem;">Building Bulletproof Automation Systems</p>
+        <div class="tagline">Building Bulletproof Automation Systems</div>
     </header>
 
-    <!-- MOVING BOXES SECTION -->
+    <!-- MOVING BOXES SECTION - Enhanced Visuals -->
     <div class="scroller">
         <div class="scroller-track">
-            <!-- Box 1 -->
+            <!-- Card 1 -->
             <div class="card">
                 <p class="card-text">"Reduced regression time from 2 days to 30 minutes, a saving of over 95% using Playwright."</p>
                 <div class="card-brand"><i class="fa-solid fa-bolt"></i> PLAYWRIGHT</div>
             </div>
-            <!-- Box 2 -->
+            <!-- Card 2 -->
             <div class="card">
                 <p class="card-text">"Integrated 120+ E2E tests into CI/CD pipeline ensuring zero critical bugs in production."</p>
                 <div class="card-brand"><i class="fa-solid fa-microchip"></i> AUTOMATION</div>
             </div>
-            <!-- Box 3 -->
+            <!-- Card 3 -->
             <div class="card">
                 <p class="card-text">"Automated 200+ API endpoints with Postman, achieving 100% data integrity validation."</p>
                 <div class="card-brand"><i class="fa-solid fa-link"></i> POSTMAN</div>
             </div>
-            <!-- Box 4 -->
+            <!-- Card 4 -->
             <div class="card">
                 <p class="card-text">"Handled 5000+ concurrent users testing using JMeter, identifying critical bottlenecks."</p>
-                <div class="card-brand"><i class="fa-solid fa-gauge"></i> JMETER</div>
+                <div class="card-brand"><i class="fa-solid fa-gauge-high"></i> JMETER</div>
             </div>
-            <!-- Box 5 -->
+            <!-- Card 5 -->
             <div class="card">
                 <p class="card-text">"Built stable and flake-free UI testing suites using Cypress for high-traffic web apps."</p>
                 <div class="card-brand"><i class="fa-solid fa-eye"></i> CYPRESS</div>
             </div>
-            <!-- Duplicate for infinite effect -->
+            <!-- Duplicate for seamless infinite loop -->
             <div class="card">
                 <p class="card-text">"Reduced regression time from 2 days to 30 minutes, a saving of over 95% using Playwright."</p>
                 <div class="card-brand"><i class="fa-solid fa-bolt"></i> PLAYWRIGHT</div>
@@ -135,7 +447,7 @@
             </div>
             <div class="card">
                 <p class="card-text">"Handled 5000+ concurrent users testing using JMeter, identifying critical bottlenecks."</p>
-                <div class="card-brand"><i class="fa-solid fa-gauge"></i> JMETER</div>
+                <div class="card-brand"><i class="fa-solid fa-gauge-high"></i> JMETER</div>
             </div>
             <div class="card">
                 <p class="card-text">"Built stable and flake-free UI testing suites using Cypress for high-traffic web apps."</p>
@@ -145,40 +457,118 @@
     </div>
 
     <section class="container">
-        <h2 class="section-title">Core Repositories</h2>
+        <h2 class="section-title"><span>Core Repositories</span></h2>
         <div class="project-grid">
-            <a href="https://github.com/malaikaashraf-hue/QA-Automation-Portfolio/tree/main/Playwright" class="p-card">
+            <a href="https://github.com/malaikaashraf-hue/QA-Automation-Portfolio/tree/main/Playwright" class="p-card" target="_blank">
                 <h3>🎭 Playwright Suite</h3>
-                <p>E2E Automation Framework with POM.</p>
+                <p>E2E Automation Framework with Page Object Model. Scalable, resilient, and integrated with CI/CD pipelines.</p>
+                <div class="repo-icon"><i class="fa-brands fa-github"></i> explore →</div>
             </a>
-            <a href="https://github.com/malaikaashraf-hue/QA-Automation-Portfolio/tree/main/cypress_projects" class="p-card">
+            <a href="https://github.com/malaikaashraf-hue/QA-Automation-Portfolio/tree/main/cypress_projects" class="p-card" target="_blank">
                 <h3>🚀 Cypress Projects</h3>
-                <p>Fast and Reliable UI Testing.</p>
+                <p>Fast and reliable UI testing with real-time reloads, time-travel debugging, and flake-free assertions.</p>
+                <div class="repo-icon"><i class="fa-brands fa-github"></i> explore →</div>
             </a>
-            <a href="https://github.com/malaikaashraf-hue/QA-Automation-Portfolio/tree/main/QA_Postman" class="p-card">
+            <a href="https://github.com/malaikaashraf-hue/QA-Automation-Portfolio/tree/main/QA_Postman" class="p-card" target="_blank">
                 <h3>🔌 API Collections</h3>
-                <p>Automated API Testing with Newman.</p>
+                <p>Automated API Testing with Newman, contract testing, and comprehensive data validation suites.</p>
+                <div class="repo-icon"><i class="fa-brands fa-github"></i> explore →</div>
             </a>
         </div>
     </section>
 
     <footer>
-        <p style="font-weight: 700;">© 2024 Malaika Ashraf</p>
-        <p style="color: var(--text-gray); font-size: 0.8rem; margin-top: 5px;">Quality is not an act, it is a habit.</p>
+        <p style="font-weight: 600; letter-spacing: -0.2px;">© 2025 Malaika Ashraf</p>
+        <div class="footer-quote">
+            <i class="fa-regular fa-gem" style="color: var(--accent); margin-right: 6px;"></i> Quality is not an act, it is a habit.
+        </div>
     </footer>
 
     <script>
+        // Refined cursor animation with smoother follower
         const cursor = document.getElementById('cursor');
         const follower = document.getElementById('cursor-f');
+        
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
 
         document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            setTimeout(() => {
-                follower.style.left = (e.clientX - 15) + 'px';
-                follower.style.top = (e.clientY - 15) + 'px';
-            }, 60);
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
         });
+
+        // Smooth follower with lerp effect
+        function animateFollower() {
+            followerX += (mouseX - followerX) * 0.15;
+            followerY += (mouseY - followerY) * 0.15;
+            
+            follower.style.left = followerX + 'px';
+            follower.style.top = followerY + 'px';
+            
+            requestAnimationFrame(animateFollower);
+        }
+        
+        animateFollower();
+
+        // Interactive cursor scaling effect on clickable elements
+        const interactiveElements = document.querySelectorAll('a, .card, .p-card, .badge');
+        
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.8)';
+                follower.style.width = '48px';
+                follower.style.height = '48px';
+                follower.style.opacity = '0.6';
+                follower.style.borderWidth = '2px';
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                follower.style.width = '36px';
+                follower.style.height = '36px';
+                follower.style.opacity = '0.4';
+                follower.style.borderWidth = '1.5px';
+            });
+        });
+
+        // Add subtle hover effect on cards with dynamic shadow
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+            });
+        });
+
+        // prevent cursor from disappearing when leaving window
+        document.addEventListener('mouseleave', () => {
+            cursor.style.opacity = '0';
+            follower.style.opacity = '0';
+        });
+        
+        document.addEventListener('mouseenter', () => {
+            cursor.style.opacity = '1';
+            follower.style.opacity = '0.4';
+        });
+        
+        // ensure follower initial position
+        setTimeout(() => {
+            follower.style.left = '50%';
+            follower.style.top = '50%';
+        }, 10);
     </script>
 </body>
 </html>
